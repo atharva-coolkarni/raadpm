@@ -1,183 +1,131 @@
 # RAADPM — Responsible AI Assisted Decision & Priority Manager
 
-**MailOps AI for banking operations.** An operational mailbox receives hundreds of messages a day —
-UPI failures, ATM outages, audit evidence requests, change approvals, vendor escalations. RAADPM
-reads each one, classifies it, extracts the actions hiding inside it, suggests an owner and an SLA,
-drafts a response, and records every decision so an auditor can reconstruct it later.
+RAADPM is a hackathon prototype for triaging operational banking emails. It classifies incoming messages, identifies priority and risk, masks PII, extracts actions, recommends an owner and SLA, drafts a response, and records decisions in an audit trail.
 
-A human always approves before anything is sent.
+The application is split into a React frontend and a FastAPI backend. It uses local JSON files for demo data—no database or Docker setup is required.
 
----
+## Features
 
-## Run it
+- Priority, category, owner, SLA, and risk recommendations
+- Local PII masking before analysis
+- Explainable rule-based triage that works without API keys
+- Optional Groq, Gemini, or OpenRouter enrichment with a safe rule-engine fallback
+- Human approval workflow and JSON-backed audit log
+- Dashboard, inbox, AI analysis, tasks, analytics, audit logs, runbooks, and settings screens
 
-Two terminals. No database, no Docker, no API keys required.
+## Project structure
 
-### Backend
-
-```bash
-cd backend
-pip install -r requirements.txt
-python generate_data.py          # writes 100 emails, 40 tasks, 20 runbooks, 30 audit logs
-uvicorn app:app --reload         # http://127.0.0.1:8000
+```text
+code-hack/
+├── backend/
+│   ├── app.py                 # FastAPI entrypoint
+│   ├── generate_data.py       # Recreates the demo data set
+│   ├── requirements.txt
+│   ├── data/                  # JSON demo data
+│   └── raadpm/
+│       ├── core/              # Store and Pydantic schemas
+│       ├── routers/           # API endpoints
+│       └── services/          # Rules engine and optional LLM service
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   ├── pages/
+│   │   └── types/
+│   ├── package.json
+│   └── vite.config.ts
+└── README.md
 ```
 
-Interactive API docs: <http://127.0.0.1:8000/docs>
+## Prerequisites
 
-### Frontend
+- Python 3.10+
+- Node.js 18+
 
-```bash
+## Run locally
+
+Start the backend in one terminal:
+
+```powershell
+cd backend
+python -m pip install -r requirements.txt
+uvicorn app:app --reload
+```
+
+The API will be available at <http://127.0.0.1:8000>. Interactive API documentation is available at <http://127.0.0.1:8000/docs>.
+
+Start the frontend in a second terminal:
+
+```powershell
 cd frontend
 npm install
-npm run dev                      # http://localhost:5173
+npm run dev
 ```
 
-That is the whole setup. The rule engine runs entirely offline, so the demo works with no network.
+Open the URL printed by Vite (normally <http://localhost:5173>). Do not open `frontend/index.html` directly.
 
----
+## Optional LLM configuration
 
-## Architecture
+The default rule engine works fully offline. To enable an LLM provider, create `backend/.env` from the example:
 
-```
-raadpm/
-├── backend/
-│   ├── app.py                       # FastAPI entrypoint, CORS, router wiring, /health
-│   ├── generate_data.py             # seeded corpus generator (fixed seed = identical demo)
-│   ├── requirements.txt
-│   ├── .env.example                 # optional free-tier LLM config
-│   ├── data/                        # the "database": five JSON files
-│   │   ├── emails.json  tasks.json  runbooks.json  audit.json  analytics.json
-│   └── raadpm/
-│       ├── core/
-│       │   ├── store.py             # JSON load / cache / write-back, audit append
-│       │   └── schemas.py           # pydantic request and response models
-│       ├── routers/
-│       │   ├── dashboard.py  emails.py  analyze.py
-│       │   ├── tasks.py  analytics.py  audit.py  runbooks.py
-│       └── services/
-│           ├── rules_engine.py      # deterministic triage: priority, category, owner, PII, actions
-│           └── ai_service.py        # the ONLY file that talks to an LLM, with rule fallback
-└── frontend/
-    └── src/
-        ├── components/
-        │   ├── ui/                  # shadcn-style primitives: button, card, badge, input, tabs…
-        │   ├── layout/              # AppShell, Sidebar, Topbar, ResponsibleAIBar
-        │   ├── common/              # PriorityBadge, StatusPill, ConfidenceMeter, EmptyState…
-        │   ├── dashboard/           # KpiCard, Charts, TriageQueue, ResponsibleAIPanel
-        │   ├── inbox/               # EmailListItem, InboxToolbar, Pagination
-        │   └── email/               # AnalysisPanel, DraftResponseCard
-        ├── pages/                   # the nine screens
-        ├── hooks/queries.ts         # TanStack Query hooks
-        ├── lib/                     # api.ts (axios), utils.ts, constants.ts
-        └── types/index.ts           # shared domain types
+```powershell
+Copy-Item .env.example .env
 ```
 
-**Stack.** React 18 · Vite · TypeScript · TailwindCSS · shadcn-style components · React Router ·
-TanStack Query · Axios · Framer Motion · Lucide · Recharts · FastAPI · JSON storage.
+Then set the provider and its matching key:
 
----
-
-## Screens
-
-| Screen | What it does |
-| --- | --- |
-| **Dashboard** | Six KPI cards, priority donut, category bars, 14-day volume trend, resolution and SLA trend, live triage queue, Responsible AI status |
-| **Inbox** | Two-pane command centre: filterable list on the left, full AI analysis rail on the right. Search, sort, priority and category filters, bulk selection, pagination |
-| **Email detail** | Original vs masked view, linked actions, metadata, and the complete analysis panel |
-| **AI analysis** | Paste any message and run the engine live — see priority, signals, masking, actions and the draft |
-| **Actions** | Every extracted action with owner, team, due date and overdue state. Move tasks through their lifecycle |
-| **Analytics** | Headline metrics plus eight charts: priority, category, volume, SLA, confidence bands, owner load, department load, action pipeline |
-| **Audit logs** | Every AI decision and human override, filterable by actor and event, exportable to CSV |
-| **Knowledge base** | 20 runbooks with steps, owning team, effort estimate and linked message count |
-| **Settings** | Engine status, confidence threshold, Responsible AI guardrails (locked on), data source health |
-
-Sidebar folders — High priority, Audit & compliance, Security, Infrastructure, Change management,
-Incidents — plus quick filters for Unread, Flagged, SLA at risk and Overdue, all with live counts.
-
----
-
-## How the triage works
-
-Every message runs through `rules_engine.analyze()`:
-
-1. **PII masking first.** Phone numbers, email addresses, card numbers, account numbers, IFSC codes
-   and PAN are replaced before anything else happens — including before any model call.
-2. **Priority** from severity keywords, matched on whole words so "severity" never triggers on
-   `sev`. `outage`, `critical`, `data breach` → P1; `degraded`, `latency`, `mismatch` → P2.
-3. **Category** by weighted scoring across 11 domains, with subject-line keywords counted double.
-4. **Owner and team** from the standing ownership matrix for that category.
-5. **Risk score and confidence** from signal density and body length.
-6. **Runbook** matched from the library, **actions** extracted by intent patterns
-   (provide / approve / review / restore / investigate / escalate / remediate / schedule).
-7. **Reasoning** recorded — the exact signals that produced each field, shown in the UI.
-
-### Optional LLM
-
-`ai_service.py` is the single integration point. Set a free-tier provider in the backend
-environment:
-
-```bash
-RAADPM_AI_PROVIDER=groq          # or gemini, or openrouter
-GROQ_API_KEY=your_free_key
+```env
+RAADPM_AI_PROVIDER=groq
+GROQ_API_KEY=your_groq_api_key
 ```
 
-The model's judgement fields are merged over the rule baseline; masking and approval rules stay
-local either way. **If the key is missing, the provider errors, or the call times out, triage falls
-back to the rule engine silently** — the demo cannot break because of a network problem.
+Supported providers are `groq`, `gemini`, and `openrouter`. If no key is present, an API call fails, or a request times out, RAADPM falls back to the local rules engine. Never commit `.env` files.
 
----
+## Demo data
 
-## API
+The repository includes a seeded JSON corpus in `backend/data`. To replace it with a fresh copy of the same deterministic demo set:
 
-| Method | Route | Purpose |
+```powershell
+cd backend
+python generate_data.py
+```
+
+Approvals and status changes are saved back to these JSON files. Regenerate the data to reset the demo.
+
+## API overview
+
+| Method | Route | Description |
 | --- | --- | --- |
-| GET | `/dashboard` | KPIs, charts, triage queue, Responsible AI status |
-| GET | `/emails` | List with `q`, `priority`, `category`, `status`, `owner`, `folder`, `sort`, `page` |
-| GET | `/emails/counts` | Live sidebar folder counts |
-| GET | `/emails/{id}` | Full record with runbook, related messages and linked tasks |
-| PATCH | `/emails/{id}/status` | Change status, writes an audit entry |
-| POST | `/emails/{id}/approval` | Approve, reject or edit a draft — writes an audit entry |
-| POST | `/emails/{id}/reanalyze` | Re-run triage and persist the refreshed result |
-| POST | `/analyze` | Triage arbitrary subject and body |
-| GET | `/tasks` · PATCH `/tasks/{id}` | Extracted actions and lifecycle |
-| GET | `/analytics` | All chart series plus headline metrics |
-| GET | `/audit` | Filterable decision trail |
-| GET | `/runbooks` · `/runbooks/{id}` | Knowledge base |
-| GET | `/health` · `/meta/filters` | Service status and filter options |
+| GET | `/health` | Service and AI-provider status |
+| GET | `/dashboard` | Dashboard KPIs and chart data |
+| GET | `/emails` | Filterable email list |
+| GET | `/emails/{id}` | Full email details and analysis |
+| PATCH | `/emails/{id}/status` | Update an email status |
+| POST | `/emails/{id}/approval` | Record an approval, rejection, or edit |
+| POST | `/emails/{id}/reanalyze` | Re-run stored email triage |
+| POST | `/analyze` | Analyze a new message |
+| GET/PATCH | `/tasks`, `/tasks/{id}` | List or update extracted actions |
+| GET | `/analytics`, `/audit`, `/runbooks` | Analytics, audit trail, and runbooks |
 
----
+## Scripts
 
-## Responsible AI
+From `frontend/`:
 
-Not a badge — these are wired into the behaviour:
+```powershell
+npm run dev     # Start Vite development server
+npm run lint    # Type-check the frontend
+npm run build   # Build the production frontend
+```
 
-- **PII masked** locally before analysis, and the masked view is the default on every record
-- **Human in the loop** — P1, P2 and anything below the confidence threshold cannot auto-send
-- **Explainable** — every classification carries the signals that produced it
-- **Audit ready** — approvals, edits, rejections, overrides and status changes all append to an
-  immutable trail, exportable as CSV
-- **Synthetic data only** — no customer information anywhere in the corpus
+## Responsible AI notes
 
----
+- PII masking happens locally before analysis.
+- P1, P2, and low-confidence messages require human approval before sending.
+- Each analysis includes reasoning signals used to reach its result.
+- This repository contains synthetic demo data only.
 
-## Two-minute demo path
+## Limitations
 
-1. **Dashboard** — open on the KPI strip and the risk score, point at the triage queue.
-2. **High priority** in the sidebar — the P1 queue, with SLA-at-risk flags.
-3. Click a UPI or ATM message — the analysis rail fills in: summary, confidence, extracted actions,
-   suggested owner, runbook, reasoning.
-4. Toggle **Original / Masked** on the full record to show masking.
-5. Edit the draft, then **Approve & send**.
-6. **Audit logs** — the approval you just made is at the top of the trail, attributed to you.
-7. **AI analysis** — paste a fresh message with a phone number in it and run the engine live.
-
----
-
-## Notes
-
-- The corpus is generated with a fixed seed, so every teammate and every judge sees the same data.
-  Regenerate any time with `python generate_data.py`.
-- Approvals and status changes are written back to the JSON files, so they survive a page refresh
-  during the demo. Delete `backend/data/` and regenerate for a clean slate.
-- This is a hackathon prototype, not a production banking system: no authentication, no encryption
-  at rest, and no real mailbox connection.
+This is a demonstration project, not a production banking system. It has no authentication, persistent database, production secret management, or live mailbox integration.
