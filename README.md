@@ -119,6 +119,21 @@ npm run lint    # Type-check the frontend
 npm run build   # Build the production frontend
 ```
 
+## Deploy the backend on Render
+
+Create a **Python** Web Service from this repository and use these settings:
+
+| Setting | Value |
+| --- | --- |
+| Root Directory | `backend` |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `uvicorn app:app --host 0.0.0.0 --port $PORT` |
+| Health Check Path | `/health` |
+
+The repository includes `.python-version` with Python 3.12, which prevents Render from using its default Python 3.14 runtime. You can instead set `PYTHON_VERSION` to a fully-qualified Python 3.12 release in the Render environment settings.
+
+Set `RAADPM_AI_PROVIDER` and the provider API key as Render environment variables if you want LLM enrichment. Do not upload or commit `backend/.env`.
+
 ## Responsible AI notes
 
 - PII masking happens locally before analysis.
