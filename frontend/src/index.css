@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: 216 33% 97%;
+    --surface: 0 0% 100%;
+    --elevated: 210 40% 99%;
+    --line: 214 25% 90%;
+    --ink: 218 33% 14%;
+    --ink-muted: 217 15% 40%;
+    --ink-subtle: 217 12% 55%;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "tnum";
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500/60 ring-offset-1 ring-offset-white;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-line bg-surface shadow-card;
+  }
+
+  .label-caps {
+    @apply text-2xs font-semibold uppercase tracking-wider text-ink-subtle;
+  }
+
+  .grid-noise {
+    background-image: linear-gradient(hsl(var(--line) / 0.6) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--line) / 0.6) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

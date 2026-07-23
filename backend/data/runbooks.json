@@ -1,0 +1,283 @@
+[
+  {
+    "id": "RB-000",
+    "title": "General operational triage",
+    "owner_team": "Operations",
+    "steps": [
+      "Acknowledge the request and confirm the reporter",
+      "Classify against the service catalogue",
+      "Assign to the accountable team",
+      "Record the resolution and close the loop"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-05-08",
+    "usage_count": 42
+  },
+  {
+    "id": "RB-001",
+    "title": "UPI transaction failure recovery",
+    "owner_team": "Payments",
+    "steps": [
+      "Check NPCI switch health dashboard",
+      "Validate the payment bridge queue depth",
+      "Re-drive failed transactions in batches of 500",
+      "Confirm reconciliation with the settlement report",
+      "Publish customer communication if impact exceeds 15 minutes"
+    ],
+    "estimated_minutes": 50,
+    "last_reviewed": "2026-06-26",
+    "usage_count": 125
+  },
+  {
+    "id": "RB-002",
+    "title": "ATM terminal outage restoration",
+    "owner_team": "Channels",
+    "steps": [
+      "Identify affected terminal IDs from the monitoring console",
+      "Confirm network reachability to the terminal controller",
+      "Restart the terminal service and verify handshake",
+      "Notify branch operations of restoration"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-10",
+    "usage_count": 156
+  },
+  {
+    "id": "RB-003",
+    "title": "VPN and network latency triage",
+    "owner_team": "Infrastructure",
+    "steps": [
+      "Check concentrator CPU and session count",
+      "Review link utilisation on the primary circuit",
+      "Fail over to the secondary tunnel if utilisation exceeds 80%",
+      "Confirm user connectivity with a sample group"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-13",
+    "usage_count": 167
+  },
+  {
+    "id": "RB-004",
+    "title": "Account lockout and password reset",
+    "owner_team": "Identity & Access",
+    "steps": [
+      "Verify requester identity against the HR record",
+      "Reset credentials and enforce change at next logon",
+      "Confirm MFA enrolment is intact",
+      "Log the reset in the access register"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-06-05",
+    "usage_count": 23
+  },
+  {
+    "id": "RB-005",
+    "title": "Critical vulnerability remediation",
+    "owner_team": "Cyber Security",
+    "steps": [
+      "Confirm the finding and affected asset inventory",
+      "Assess exploitability and customer exposure",
+      "Raise an emergency change if severity is critical",
+      "Patch, retest, and record the closure evidence"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-08",
+    "usage_count": 67
+  },
+  {
+    "id": "RB-006",
+    "title": "Database capacity expansion",
+    "owner_team": "Infrastructure",
+    "steps": [
+      "Confirm current utilisation and growth trend",
+      "Reclaim space from archived partitions",
+      "Raise a standard change for volume extension",
+      "Validate performance after expansion"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-16",
+    "usage_count": 152
+  },
+  {
+    "id": "RB-007",
+    "title": "Audit evidence preparation",
+    "owner_team": "Risk & Compliance",
+    "steps": [
+      "Identify the control and the sampling period",
+      "Extract system-generated evidence with timestamps",
+      "Mask customer identifiers before sharing",
+      "Obtain reviewer sign-off and file the pack"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-05-02",
+    "usage_count": 47
+  },
+  {
+    "id": "RB-008",
+    "title": "Standard change approval",
+    "owner_team": "Change Management",
+    "steps": [
+      "Validate the implementation and rollback plan",
+      "Confirm the maintenance window with owners",
+      "Record CAB approval",
+      "Verify post-implementation health checks"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-06",
+    "usage_count": 93
+  },
+  {
+    "id": "RB-009",
+    "title": "Phishing campaign containment",
+    "owner_team": "Cyber Security",
+    "steps": [
+      "Block the sender domain and quarantine delivered mail",
+      "Identify recipients who submitted credentials",
+      "Force password reset for exposed accounts",
+      "Publish an awareness note to staff"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-07-03",
+    "usage_count": 26
+  },
+  {
+    "id": "RB-010",
+    "title": "Backup failure and restore validation",
+    "owner_team": "Infrastructure",
+    "steps": [
+      "Review the job log for the failure code",
+      "Re-run the backup outside the busy window",
+      "Perform a sample restore to a scratch volume",
+      "Record the validation result"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-06-29",
+    "usage_count": 111
+  },
+  {
+    "id": "RB-011",
+    "title": "Core banking batch failure recovery",
+    "owner_team": "Core Banking",
+    "steps": [
+      "Identify the failed step and return code",
+      "Confirm data integrity of partial postings",
+      "Restart the batch from the last checkpoint",
+      "Reconcile the general ledger before the morning window"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-09",
+    "usage_count": 114
+  },
+  {
+    "id": "RB-012",
+    "title": "Card settlement file exception",
+    "owner_team": "Payments",
+    "steps": [
+      "Confirm non-receipt with the file transfer log",
+      "Raise a chase with the vendor operations desk",
+      "Apply the contingency settlement position",
+      "Reconcile once the file arrives"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-01",
+    "usage_count": 125
+  },
+  {
+    "id": "RB-013",
+    "title": "Certificate renewal",
+    "owner_team": "Infrastructure",
+    "steps": [
+      "List certificates expiring within 30 days",
+      "Generate CSRs and obtain issued certificates",
+      "Deploy through a standard change",
+      "Verify chain of trust on all endpoints"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-04-21",
+    "usage_count": 125
+  },
+  {
+    "id": "RB-014",
+    "title": "Privileged access revocation",
+    "owner_team": "Identity & Access",
+    "steps": [
+      "Reconcile the leaver list against the directory",
+      "Revoke entitlements and shared account access",
+      "Capture confirmation screenshots for audit",
+      "Update the access register"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-06-28",
+    "usage_count": 130
+  },
+  {
+    "id": "RB-015",
+    "title": "Vendor SLA escalation",
+    "owner_team": "Vendor Governance",
+    "steps": [
+      "Compile the breach evidence for the period",
+      "Confirm the contractual remedy position",
+      "Raise the escalation at the governance forum",
+      "Record the agreed corrective plan"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-07-07",
+    "usage_count": 176
+  },
+  {
+    "id": "RB-016",
+    "title": "Mobile release rollback decision",
+    "owner_team": "Digital Channels",
+    "steps": [
+      "Review crash-free session trend and complaint volume",
+      "Confirm the rollback artefact is available",
+      "Take a go or no-go decision with product",
+      "Execute rollback through an emergency change"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-06-12",
+    "usage_count": 164
+  },
+  {
+    "id": "RB-017",
+    "title": "DR replication lag",
+    "owner_team": "Infrastructure",
+    "steps": [
+      "Measure current lag against the RPO commitment",
+      "Check link utilisation and queue depth",
+      "Throttle non-critical replication streams",
+      "Confirm lag returns within threshold"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-05-21",
+    "usage_count": 92
+  },
+  {
+    "id": "RB-018",
+    "title": "Branch cash reconciliation mismatch",
+    "owner_team": "Branch Operations",
+    "steps": [
+      "Retrieve the branch cash position statement",
+      "Match against teller and ATM entries",
+      "Identify the unmatched entry and correct it",
+      "Escalate if unresolved by end of day"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-05-01",
+    "usage_count": 20
+  },
+  {
+    "id": "RB-019",
+    "title": "Firewall rule change",
+    "owner_team": "Cyber Security",
+    "steps": [
+      "Validate the business justification",
+      "Confirm least-privilege scoping of the rule",
+      "Schedule through CAB",
+      "Verify connectivity and log the rule owner"
+    ],
+    "estimated_minutes": 42,
+    "last_reviewed": "2026-05-23",
+    "usage_count": 105
+  }
+]

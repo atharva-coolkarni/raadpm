@@ -1,0 +1,19 @@
+# JavaScript dependencies and build artifacts
+node_modules/
+frontend/dist/
+.vite/
+
+# Python bytecode and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local editor and Codex metadata
+.agents/
+.codex/
+
+# Environment secrets
+.env
+.env.*
+!.env.example

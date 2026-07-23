@@ -1,0 +1,332 @@
+{
+  "priority_distribution": [
+    {
+      "name": "P1",
+      "value": 24
+    },
+    {
+      "name": "P2",
+      "value": 32
+    },
+    {
+      "name": "P3",
+      "value": 40
+    },
+    {
+      "name": "P4",
+      "value": 4
+    }
+  ],
+  "category_distribution": [
+    {
+      "name": "Incident Management",
+      "value": 16
+    },
+    {
+      "name": "Audit & Compliance",
+      "value": 16
+    },
+    {
+      "name": "Infrastructure",
+      "value": 12
+    },
+    {
+      "name": "Change Management",
+      "value": 12
+    },
+    {
+      "name": "Security",
+      "value": 8
+    },
+    {
+      "name": "Vendor Management",
+      "value": 8
+    },
+    {
+      "name": "Core Banking",
+      "value": 8
+    },
+    {
+      "name": "Payments",
+      "value": 8
+    },
+    {
+      "name": "Reporting",
+      "value": 4
+    },
+    {
+      "name": "Access Management",
+      "value": 4
+    },
+    {
+      "name": "General",
+      "value": 4
+    }
+  ],
+  "status_distribution": [
+    {
+      "name": "Awaiting Approval",
+      "value": 18
+    },
+    {
+      "name": "In Progress",
+      "value": 16
+    },
+    {
+      "name": "New",
+      "value": 41
+    },
+    {
+      "name": "Closed",
+      "value": 5
+    },
+    {
+      "name": "Resolved",
+      "value": 10
+    },
+    {
+      "name": "In Review",
+      "value": 10
+    }
+  ],
+  "department_load": [
+    {
+      "name": "IT Operations",
+      "value": 21
+    },
+    {
+      "name": "Identity & Access",
+      "value": 11
+    },
+    {
+      "name": "Cyber Security",
+      "value": 11
+    },
+    {
+      "name": "Branch Operations",
+      "value": 10
+    },
+    {
+      "name": "Infrastructure",
+      "value": 10
+    },
+    {
+      "name": "Risk & Compliance",
+      "value": 9
+    },
+    {
+      "name": "Core Banking",
+      "value": 9
+    },
+    {
+      "name": "Digital Channels",
+      "value": 9
+    },
+    {
+      "name": "Vendor Governance",
+      "value": 6
+    },
+    {
+      "name": "Payments",
+      "value": 4
+    }
+  ],
+  "daily_trend": [
+    {
+      "date": "05 Jul",
+      "received": 62,
+      "auto_resolved": 19,
+      "escalated": 7
+    },
+    {
+      "date": "06 Jul",
+      "received": 82,
+      "auto_resolved": 23,
+      "escalated": 10
+    },
+    {
+      "date": "07 Jul",
+      "received": 55,
+      "auto_resolved": 12,
+      "escalated": 2
+    },
+    {
+      "date": "08 Jul",
+      "received": 89,
+      "auto_resolved": 20,
+      "escalated": 11
+    },
+    {
+      "date": "09 Jul",
+      "received": 77,
+      "auto_resolved": 13,
+      "escalated": 5
+    },
+    {
+      "date": "10 Jul",
+      "received": 63,
+      "auto_resolved": 11,
+      "escalated": 3
+    },
+    {
+      "date": "11 Jul",
+      "received": 64,
+      "auto_resolved": 21,
+      "escalated": 8
+    },
+    {
+      "date": "12 Jul",
+      "received": 12,
+      "auto_resolved": 2,
+      "escalated": 1
+    },
+    {
+      "date": "13 Jul",
+      "received": 10,
+      "auto_resolved": 2,
+      "escalated": 0
+    },
+    {
+      "date": "14 Jul",
+      "received": 20,
+      "auto_resolved": 5,
+      "escalated": 2
+    },
+    {
+      "date": "15 Jul",
+      "received": 10,
+      "auto_resolved": 1,
+      "escalated": 1
+    },
+    {
+      "date": "16 Jul",
+      "received": 22,
+      "auto_resolved": 4,
+      "escalated": 1
+    },
+    {
+      "date": "17 Jul",
+      "received": 23,
+      "auto_resolved": 6,
+      "escalated": 2
+    },
+    {
+      "date": "18 Jul",
+      "received": 3,
+      "auto_resolved": 0,
+      "escalated": 0
+    }
+  ],
+  "resolution_trend": [
+    {
+      "date": "05 Jul",
+      "avg_minutes": 32,
+      "sla_met_pct": 89
+    },
+    {
+      "date": "06 Jul",
+      "avg_minutes": 48,
+      "sla_met_pct": 92
+    },
+    {
+      "date": "07 Jul",
+      "avg_minutes": 65,
+      "sla_met_pct": 93
+    },
+    {
+      "date": "08 Jul",
+      "avg_minutes": 48,
+      "sla_met_pct": 93
+    },
+    {
+      "date": "09 Jul",
+      "avg_minutes": 54,
+      "sla_met_pct": 90
+    },
+    {
+      "date": "10 Jul",
+      "avg_minutes": 60,
+      "sla_met_pct": 95
+    },
+    {
+      "date": "11 Jul",
+      "avg_minutes": 75,
+      "sla_met_pct": 94
+    },
+    {
+      "date": "12 Jul",
+      "avg_minutes": 43,
+      "sla_met_pct": 88
+    },
+    {
+      "date": "13 Jul",
+      "avg_minutes": 68,
+      "sla_met_pct": 91
+    },
+    {
+      "date": "14 Jul",
+      "avg_minutes": 66,
+      "sla_met_pct": 90
+    },
+    {
+      "date": "15 Jul",
+      "avg_minutes": 43,
+      "sla_met_pct": 92
+    },
+    {
+      "date": "16 Jul",
+      "avg_minutes": 44,
+      "sla_met_pct": 94
+    },
+    {
+      "date": "17 Jul",
+      "avg_minutes": 58,
+      "sla_met_pct": 88
+    },
+    {
+      "date": "18 Jul",
+      "avg_minutes": 71,
+      "sla_met_pct": 94
+    }
+  ],
+  "confidence_bands": [
+    {
+      "name": "90-100%",
+      "value": 44
+    },
+    {
+      "name": "80-89%",
+      "value": 24
+    },
+    {
+      "name": "70-79%",
+      "value": 28
+    },
+    {
+      "name": "Below 70%",
+      "value": 4
+    }
+  ],
+  "task_status": [
+    {
+      "name": "Open",
+      "value": 12
+    },
+    {
+      "name": "In Progress",
+      "value": 11
+    },
+    {
+      "name": "Blocked",
+      "value": 3
+    },
+    {
+      "name": "Awaiting Approval",
+      "value": 7
+    },
+    {
+      "name": "Done",
+      "value": 7
+    }
+  ]
+}
